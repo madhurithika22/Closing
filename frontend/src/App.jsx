@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from './pages/Dashboard';
-import { 
-  UploadCloud, 
-  FileText, 
-  TrendingUp, 
-  History, 
-  Sun, 
-  Moon, 
-  Flame, 
-  Activity, 
+import {
+  UploadCloud,
+  FileText,
+  TrendingUp,
+  History,
+  Sun,
+  Moon,
+  Flame,
+  Activity,
   Database,
   ChevronRight
 } from 'lucide-react';
@@ -27,7 +27,7 @@ export default function App() {
   }, [isDark]);
 
   const navItems = [
-    { id: 'ingest', label: 'Ingest & Upload', subtitle: 'Stage cycle reports', icon: UploadCloud },
+    { id: 'ingest', label: 'Ingest & Upload', subtitle: 'Stage closing documents', icon: UploadCloud },
     { id: 'viewer', label: 'Digitized Viewer', subtitle: 'Parsed document blocks', icon: FileText },
     { id: 'analytics', label: 'Analytics', subtitle: 'Tonnage & cluster signals', icon: TrendingUp },
     { id: 'historical', label: 'Historical Logs', subtitle: 'Saved cycle archive', icon: History }
@@ -46,18 +46,18 @@ export default function App() {
     <div className="flex bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-300 font-sans selection:bg-orange-500 selection:text-white">
       {/* 1. LEFT SIDEBAR */}
       <aside className="w-64 border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 flex flex-col shrink-0 sticky top-0 h-screen transition-colors duration-300 z-50">
-        
+
         {/* Sidebar Header */}
         <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
           <div className="p-2 rounded-xl bg-orange-500 text-white shadow-md shadow-orange-500/20">
-            <Flame size={20} className="animate-pulse" />
+            <FileText size={20} className="animate-pulse" />
           </div>
           <div>
             <h1 className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white leading-none">
-              FORGE.IQ
+              Forge.IQ
             </h1>
             <span className="text-[9px] font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase mt-1 block">
-              PARSING ENGINE V3.2
+              CLOSING DOCUMENT PARSER ENGINE
             </span>
           </div>
         </div>
@@ -71,17 +71,16 @@ export default function App() {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-left relative transition-all duration-200 group ${
-                  isActive 
-                    ? 'bg-slate-100 dark:bg-slate-800/80 text-slate-900 dark:text-white font-bold' 
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-left relative transition-all duration-200 group ${isActive
+                    ? 'bg-slate-100 dark:bg-slate-800/80 text-slate-900 dark:text-white font-bold'
                     : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/35 hover:text-slate-800 dark:hover:text-slate-200 font-medium'
-                }`}
+                  }`}
               >
                 {/* Active Orange Bar indicator */}
                 {isActive && (
                   <span className="absolute left-0 top-2 bottom-2 w-1 bg-orange-500 rounded-r" />
                 )}
-                
+
                 <Icon size={18} className={`${isActive ? 'text-orange-500' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300'}`} />
                 <div>
                   <div className="text-xs leading-none">{item.label}</div>
@@ -113,14 +112,14 @@ export default function App() {
 
       {/* 2. MAIN VIEWPORT */}
       <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden relative">
-        
+
         {/* Top Header */}
         <header className="sticky top-0 z-40 bg-white/85 dark:bg-slate-950/85 border-b border-slate-200 dark:border-slate-800 backdrop-blur-md px-6 py-4 flex items-center justify-between transition-colors duration-300">
-          
+
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-xs">
             <div className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
-              <Flame size={14} className="text-orange-500" />
+              <FileText size={14} className="text-orange-500" />
               <span>Forge.IQ</span>
             </div>
             <ChevronRight size={12} className="text-slate-300 dark:text-slate-700" />
@@ -152,7 +151,7 @@ export default function App() {
         {/* Simple visual separator at footer */}
         <footer className="py-6 border-t border-slate-200 dark:border-slate-900 bg-slate-100/30 dark:bg-slate-950/20 text-center text-[11px] text-slate-400 dark:text-slate-500 transition-colors duration-300">
           <div className="max-w-[1600px] mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-medium">
-            <p>&copy; 2026 Pouring Industry &bull; Forge.IQ Advanced Metal Analysis Engine</p>
+            <p>&copy; 2026 Closing Industry &bull; Closing Document Parser Engine</p>
             <div className="flex items-center gap-4 text-slate-400 dark:text-slate-500">
               <span className="flex items-center gap-1"><Database size={12} className="text-orange-500" /> Sync Active</span>
               <span className="text-slate-300 dark:text-slate-800">|</span>

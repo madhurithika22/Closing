@@ -128,7 +128,7 @@ function DocumentPreview({ file, filename }) {
         <FileText size={48} className="text-slate-300 dark:text-slate-700 mb-3 animate-pulse" />
         <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">No Document Preview</p>
         <p className="text-[10px] text-slate-400 dark:text-slate-600 mt-1.5 max-w-[200px] leading-relaxed">
-          Upload a Heat Treatment Cycle Report to view its digital preview here.
+          Upload a Closing Document Report to view its digital preview here.
         </p>
       </div>
     );
@@ -368,78 +368,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
     { key: "pre_production_inspected_by", label: "Pre-Production Inspector" }
   ];
 
-  // Simulated Mock Data for "Run Sample"
-  const mockSampleData = {
-    document_metadata: {
-      document_title: "Heat Treatment Cycle Report",
-      cycle_no: "HT-2410-0473",
-      date: "2026-06-07",
-      furnace: "Furnace 03 - Bogle Hearth",
-      max_thickness: "102 mm",
-      status: "Verified"
-    },
-    pouring_details: {
-      time_on: "04:12:00",
-      time_reached: "07:48:22 ┬╖ 1042┬░C",
-      time_off: "11:30:00",
-      time: "04:12:00",
-      quenching_duration: "92 s",
-      water_temp_before: "28.4 ┬░C",
-      water_temp_after: "47.9 ┬░C",
-      pouring_temperature: "1535, 1538, 1540",
-      duration: "45, 48, 50",
-      pouring_weight: "1350",
-      tapping_temperature: "1640"
-    },
-    product_details: {
-      description: "Casting Queue Item",
-      grade: "CA15",
-      customer: "Pouring Industry",
-      casting_weight: "1340"
-    },
-    inspection_parameters: {
-      mould_hardness_range: "85-90",
-      core_hardness_range: "80-85"
-    },
-    tables: {
-      batch_summary: [
-        { material_code: "MAT-082", material_description: "Runner Casing Vane", batch_no: "B-8839", t_qty: "4", unit: "pcs" },
-        { material_code: "MAT-123", material_description: "Impeller Hub", batch_no: "B-2294", t_qty: "2", unit: "pcs" },
-        { material_code: "MAT-441", material_description: "Guide Bearing Sleeve", batch_no: "B-9104", t_qty: "6", unit: "pcs" }
-      ]
-    },
-    queue_pages: [
-      {
-        page_number: 1,
-        production_plan: { heat_no: "H-88241", planning_date: "2026-06-07", pouring_date: "2026-06-07", customer: "ForgeCorp", grade: "CA15", casting_weight: "1250" },
-        pouring_details: { tapping_temp: "1640┬░C", pouring_temp: "1540┬░C", laddle_temp: "1580┬░C", pouring_weight: "1280 kg" },
-        qa_parameters: { hardness_mould: "85", hardness_core: "82" }
-      },
-      {
-        page_number: 2,
-        production_plan: { heat_no: "H-88250", planning_date: "2026-06-07", pouring_date: "2026-06-07", customer: "AeroFoundry", grade: "FP-17", casting_weight: "920" },
-        pouring_details: { tapping_temp: "1630┬░C", pouring_temp: "1535┬░C", laddle_temp: "1570┬░C", pouring_weight: "930 kg" },
-        qa_parameters: { hardness_mould: "87", hardness_core: "84" }
-      }
-    ]
-  };
-
-  // Run Sample Action
-  const handleRunSample = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setResult(mockSampleData);
-      setUploadedFilename("mock_sample_cycle_log.pdf");
-      setTaskId("mock_task_id_88294");
-      setCurrentPage(0);
-      setTotalPages(1);
-      setHasNextPage(false);
-      setLoading(false);
-      setActiveTab('viewer'); // Switch to viewer tab automatically
-    }, 1000);
-  };
-
-  useEffect(() => {
+      useEffect(() => {
     if (!result) {
       setProcessedRows([]);
       return;
@@ -999,10 +928,10 @@ export default function Dashboard({ activeTab, setActiveTab }) {
           {/* Hero Header */}
           <div className="border-b border-slate-200 dark:border-slate-800 pb-5">
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Stage a Heat Treatment Cycle Report
+              Stage a Closing Document
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-sm mt-1.5 leading-relaxed">
-              Drop a scanned PDF or photograph of the cycle log. The parsing engine extracts metadata, process telemetry, pattern specs, and verification signatures.
+              Drop a scanned PDF or photograph of the closing document. The parsing engine extracts metadata, process telemetry, pattern specs, and verification signatures.
             </p>
           </div>
 
@@ -1031,7 +960,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   </div>
                   
                   <p className="text-slate-800 dark:text-slate-200 text-xs font-semibold mb-1 text-center">
-                    {file ? file.name : "Drag & drop cycle report"}
+                    {file ? file.name : "Drag & drop closing document"}
                   </p>
                   <p className="text-slate-400 dark:text-slate-550 text-[10px] uppercase font-bold tracking-wider text-center">
                     PDF - TIFF - JPG up to 40 MB
@@ -1040,13 +969,6 @@ export default function Dashboard({ activeTab, setActiveTab }) {
               </div>
               
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-end gap-3 border-t border-slate-100 dark:border-slate-800/85 pt-4">
-                <button
-                  onClick={handleRunSample}
-                  disabled={loading}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider transition-all hover:scale-[1.01]"
-                >
-                  Run Sample
-                </button>
                 <button
                   onClick={handleUpload} 
                   disabled={loading || !file}
@@ -1141,7 +1063,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   <span>Engine Profile</span>
                 </div>
                 <p className="text-slate-400 dark:text-slate-500 text-[11px] leading-relaxed mb-4">
-                  Cloud-hosted neural extraction rated for foundry and heat treatment documentation.
+                  Cloud-hosted neural extraction rated for closing documentation.
                 </p>
                 <div className="space-y-2.5 text-xs font-semibold">
                   <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-855 pb-2">
@@ -1158,7 +1080,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-slate-400 dark:text-slate-500">Compliance</span>
-                    <span className="text-slate-800 dark:text-slate-200 font-mono">ISO 9001 - AMS 2750</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-mono">ISO 9001 / EN 10204</span>
                   </div>
                 </div>
               </div>
@@ -1200,14 +1122,8 @@ export default function Dashboard({ activeTab, setActiveTab }) {
               <FileText size={44} className="text-slate-300 dark:text-slate-700 mb-4 animate-bounce" />
               <h3 className="text-slate-800 dark:text-slate-200 text-sm font-bold uppercase tracking-wider">No Document Loaded</h3>
               <p className="text-xs text-slate-400 dark:text-slate-550 mt-1.5 max-w-xs leading-relaxed">
-                Ingest a Heat Treatment record in the Ingest tab or run a simulated sample to view parsed telemetry.
+                Ingest a Closing document in the Ingest tab to view parsed telemetry.
               </p>
-              <button 
-                onClick={handleRunSample} 
-                className="mt-6 px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider transition-all hover:scale-[1.02] shadow-sm shadow-orange-500/10"
-              >
-                Run Sample Engine
-              </button>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -1223,7 +1139,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     </span>
                     <div>
                       <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                        {getMetadataValue("document_title") || "Heat Treatment Cycle Report"}
+                        {getMetadataValue("document_title") || "Closing Document Report"}
                       </h4>
                       <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5 font-mono">Ref task: {taskId || "USM-Y-CYC-2410-0473"}</p>
                     </div>
@@ -1911,10 +1827,10 @@ export default function Dashboard({ activeTab, setActiveTab }) {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
             <div>
               <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                Historical Cycle Archive
+                Historical Closing Archive
               </h2>
               <p className="text-slate-500 dark:text-slate-400 text-sm mt-1.5 leading-relaxed">
-                Master log of every saved cycle record. Export the full set as an Excel-ready sheet.
+                Master log of every saved closing record. Export the full set as an Excel-ready sheet.
               </p>
             </div>
             
