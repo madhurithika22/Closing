@@ -48,7 +48,7 @@ export default function App() {
       <aside className="w-64 border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 flex flex-col shrink-0 sticky top-0 h-screen transition-colors duration-300 z-50">
         
         {/* Sidebar Header */}
-        <div className="p-6 border-b border-slate-250 dark:border-slate-800 flex items-center gap-3">
+        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
           <div className="p-2 rounded-xl bg-orange-500 text-white shadow-md shadow-orange-500/20">
             <Flame size={20} className="animate-pulse" />
           </div>
@@ -126,28 +126,12 @@ export default function App() {
             <ChevronRight size={12} className="text-slate-300 dark:text-slate-700" />
             <div className="flex items-center gap-1.5">
               <span className="font-bold text-slate-800 dark:text-slate-200">{breadcrumb.title}</span>
-              <span className="text-[10px] text-slate-450 dark:text-slate-500 font-medium hidden sm:inline">&bull; {breadcrumb.desc}</span>
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium hidden sm:inline">&bull; {breadcrumb.desc}</span>
             </div>
           </div>
 
           {/* Telemetry Actions */}
           <div className="flex items-center gap-5">
-            {/* Live Stats */}
-            <div className="hidden md:flex items-center gap-4 text-xs">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-850">
-                <Flame size={13} className="text-orange-500" />
-                <span className="text-slate-400 font-bold dark:text-slate-500">Temp:</span>
-                <span className="font-mono font-bold text-slate-800 dark:text-slate-200">1042°C</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-850">
-                <Activity size={13} className="text-emerald-500" />
-                <span className="text-slate-400 font-bold dark:text-slate-500">Throughput:</span>
-                <span className="font-mono font-bold text-slate-800 dark:text-slate-200">4.2 t/h</span>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <span className="hidden md:block w-px h-5 bg-slate-200 dark:bg-slate-800" />
 
             {/* Dark Mode Toggle */}
             <button

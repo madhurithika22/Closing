@@ -98,6 +98,10 @@ class BatchTableRow(BaseModel):
     unit: Optional[str] = None
     b_qty: Optional[str] = None
     t_c_wt: Optional[str] = None
+    s_order: Optional[str] = None
+    s_item: Optional[str] = None
+    c_code: Optional[str] = None
+    division: Optional[str] = None
 
 # --- ROOT RESPONSE MODEL ---
 class DocumentExtractionResult(BaseModel):

@@ -144,7 +144,7 @@ function DocumentPreview({ file, filename }) {
   const isPDF = file ? file.type === "application/pdf" : filename?.toLowerCase().endsWith(".pdf");
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 rounded-2xl p-4 h-[600px] flex flex-col shadow-sm sticky top-24 transition-colors duration-300">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 h-[600px] flex flex-col shadow-sm sticky top-24 transition-colors duration-300">
       <div className="flex items-center justify-between border-b border-slate-150 dark:border-slate-800 pb-3 mb-4">
         <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
           <FileText size={14} className="text-orange-500" /> Document Preview
@@ -154,7 +154,7 @@ function DocumentPreview({ file, filename }) {
         </span>
       </div>
       
-      <div className="flex-grow rounded-xl bg-slate-50 dark:bg-slate-950 overflow-hidden relative border border-slate-200 dark:border-slate-850 flex items-center justify-center">
+      <div className="flex-grow rounded-xl bg-slate-50 dark:bg-slate-950 overflow-hidden relative border border-slate-200 dark:border-slate-800 flex items-center justify-center">
         {isMock ? (
           <div className="p-8 text-center text-slate-400 dark:text-slate-600">
             <Flame size={32} className="mx-auto text-orange-500/50 mb-2 animate-bounce" />
@@ -203,6 +203,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [taskId, setTaskId] = useState(null);
   const [nextPageLoading, setNextPageLoading] = useState(false);
+  const isLastPage = totalPages > 1 && currentPage === totalPages - 1;
 
   // Historical database analytics states
   const [rawDocuments, setRawDocuments] = useState([]);
@@ -1051,7 +1052,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   disabled={loading || !file}
                   className={`w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 ${
                     loading || !file 
-                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border border-slate-200/50 dark:border-slate-850' 
+                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border border-slate-200/50 dark:border-slate-800' 
                       : 'bg-orange-500 hover:bg-orange-600 text-white hover:scale-[1.01]'
                   }`}
                 >
@@ -1093,7 +1094,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     </button>
                     <button
                       onClick={() => setActiveTab('analytics')}
-                      className="w-full py-2.5 px-4 border border-slate-200 dark:border-slate-850 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-[10px] font-bold uppercase tracking-wider text-slate-650 dark:text-slate-350 transition-colors flex items-center justify-center gap-1.5"
+                      className="w-full py-2.5 px-4 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-[10px] font-bold uppercase tracking-wider text-slate-650 dark:text-slate-350 transition-colors flex items-center justify-center gap-1.5"
                     >
                       <TrendingUp size={12} className="text-orange-500" />
                       <span>Process Analytics</span>
@@ -1121,12 +1122,12 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                       { block: "Main Table", name: "block D" },
                       { block: "Verification", name: "block E" }
                     ].map((target, idx) => (
-                      <div key={idx} className="flex items-center justify-between border-b border-slate-100 dark:border-slate-850 pb-2 last:border-0 last:pb-0">
+                      <div key={idx} className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2 last:border-0 last:pb-0">
                         <div className="flex items-center gap-2 font-semibold text-slate-700 dark:text-slate-300">
                           <span className="w-1.5 h-1.5 rounded-full bg-orange-500/80" />
                           <span>{target.block}</span>
                         </div>
-                        <span className="text-[10px] text-slate-450 dark:text-slate-500 font-mono font-bold uppercase">{target.name}</span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono font-bold uppercase">{target.name}</span>
                       </div>
                     ))}
                   </div>
@@ -1149,7 +1150,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   </div>
                   <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-855 pb-2">
                     <span className="text-slate-400 dark:text-slate-500">Avg latency</span>
-                    <span className="text-slate-850 dark:text-slate-250 font-mono">&lt; 5.2 s / page</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-mono">&lt; 5.2 s / page</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-855 pb-2">
                     <span className="text-slate-400 dark:text-slate-500">F1 (validation)</span>
@@ -1157,7 +1158,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-slate-400 dark:text-slate-500">Compliance</span>
-                    <span className="text-slate-855 dark:text-slate-250 font-mono">ISO 9001 - AMS 2750</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-mono">ISO 9001 - AMS 2750</span>
                   </div>
                 </div>
               </div>
@@ -1224,7 +1225,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                       <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200">
                         {getMetadataValue("document_title") || "Heat Treatment Cycle Report"}
                       </h4>
-                      <p className="text-[10px] text-slate-450 dark:text-slate-500 mt-0.5 font-mono">Ref task: {taskId || "USM-Y-CYC-2410-0473"}</p>
+                      <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5 font-mono">Ref task: {taskId || "USM-Y-CYC-2410-0473"}</p>
                     </div>
                   </div>
 
@@ -1251,6 +1252,154 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                   </div>
                 </div>
 
+                {isLastPage ? (
+                  /* Custom Layout for Last Page (Batch Summary) */
+                  <div className="space-y-6 animate-fade-in">
+                    {/* Header Block */}
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm transition-colors duration-300 font-sans">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                            {getProductValue("Customer") || getProductValue("customer") || "ULTIMATE ALLOYS PVT LTD"}
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
+                            Trichy Road, Sulur, Coimbatore, Pincode: 641402
+                          </p>
+                          <p className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold mt-0.5">
+                            Ph.No: 0422-2688345 &bull; GST NO: 33AAACU3303P1ZE
+                          </p>
+                        </div>
+                        <div className="bg-orange-500/10 border border-orange-500/20 px-4 py-2.5 rounded-xl text-right shrink-0">
+                          <span className="text-[9px] text-orange-500 uppercase font-black tracking-wider block">Batch Number</span>
+                          <strong className="text-slate-800 dark:text-slate-200 text-sm font-mono font-bold block mt-0.5">
+                            {getMetadataValue("heat_no") || getMetadataValue("cycle_no") || "A09599"}
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Batch Summary Table */}
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
+                      <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/40">
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                          <Database size={13} className="text-orange-500" />
+                          Batch Summary Records
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto custom-scrollbar">
+                        <table className="min-w-full divide-y divide-slate-150 dark:divide-slate-800 text-xs font-semibold">
+                          <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-wider">
+                            <tr>
+                              <th className="px-4 py-3 text-left">P.Order</th>
+                              <th className="px-4 py-3 text-left">Material Code</th>
+                              <th className="px-4 py-3 text-left">Material Description</th>
+                              <th className="px-4 py-3 text-left">Batch No</th>
+                              <th className="px-4 py-3 text-right">T.Qty</th>
+                              <th className="px-4 py-3 text-center">Unit</th>
+                              <th className="px-4 py-3 text-right">B.Qty</th>
+                              <th className="px-4 py-3 text-right">T.C.Wt</th>
+                              <th className="px-4 py-3 text-left">S.Order</th>
+                              <th className="px-4 py-3 text-left">S.Item</th>
+                              <th className="px-4 py-3 text-left">C.Code</th>
+                              <th className="px-4 py-3 text-center">Division</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                            {result.batch_summary && result.batch_summary.length > 0 ? (
+                              result.batch_summary.map((row, idx) => (
+                                <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
+                                  <td className="px-4 py-3 font-mono">{row.p_order || "-"}</td>
+                                  <td className="px-4 py-3 font-mono font-bold text-slate-900 dark:text-white">{row.material_code || "-"}</td>
+                                  <td className="px-4 py-3 truncate max-w-[200px]" title={row.material_description}>{row.material_description || "-"}</td>
+                                  <td className="px-4 py-3 font-mono">{row.batch_no || "-"}</td>
+                                  <td className="px-4 py-3 text-right font-mono">{row.t_qty ? formatValue(row.t_qty) : "-"}</td>
+                                  <td className="px-4 py-3 text-center uppercase">{row.unit || "-"}</td>
+                                  <td className="px-4 py-3 text-right font-mono">{row.b_qty ? formatValue(row.b_qty) : "-"}</td>
+                                  <td className="px-4 py-3 text-right font-mono text-slate-900 dark:text-white font-bold">{row.t_c_wt ? formatValue(row.t_c_wt, 'weight') : "-"}</td>
+                                  <td className="px-4 py-3 font-mono">{row.s_order || "-"}</td>
+                                  <td className="px-4 py-3 font-mono">{row.s_item || "-"}</td>
+                                  <td className="px-4 py-3 font-mono">{row.c_code || "-"}</td>
+                                  <td className="px-4 py-3 text-center font-mono uppercase">{row.division || "-"}</td>
+                                </tr>
+                              ))
+                            ) : (
+                              <tr>
+                                <td colSpan="12" className="px-4 py-8 text-center text-slate-400 uppercase tracking-wider text-[10px]">
+                                  No batch summary data extracted
+                                </td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    {/* Totals & Notes Side-by-Side */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Summary Totals */}
+                      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-colors duration-300">
+                        <div className="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-2">
+                          <Scale size={14} className="text-orange-500" />
+                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Summary Totals</span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 text-xs font-semibold">
+                          <div className="border-r border-slate-200 dark:border-slate-800 pr-2">
+                            <span className="text-slate-400 dark:text-slate-500 text-[9px] uppercase font-bold tracking-wider block">Total Liquid Wt (T.L.WT)</span>
+                            <strong className="text-slate-800 dark:text-white text-sm font-bold font-mono mt-1 block">
+                              {(() => {
+                                const kgRow = result.batch_summary?.find(r => String(r.unit).toLowerCase() === 'kg');
+                                return kgRow?.t_qty ? `${parseFloat(String(kgRow.t_qty).replace(/[^0-9.]/g, '')).toLocaleString()} kg` : "3,465.2 kg";
+                              })()}
+                            </strong>
+                          </div>
+                          <div className="border-r border-slate-200 dark:border-slate-800 pr-2 pl-2">
+                            <span className="text-slate-400 dark:text-slate-500 text-[9px] uppercase font-bold tracking-wider block">Total Cast Wt (T.C.WT)</span>
+                            <strong className="text-slate-800 dark:text-white text-sm font-bold font-mono mt-1 block">
+                              {(() => {
+                                const sum = result.batch_summary?.reduce((acc, r) => acc + (parseFloat(String(r.t_c_wt).replace(/[^0-9.]/g, '')) || 0), 0) || 1744.8;
+                                return `${sum.toLocaleString()} kg`;
+                              })()}
+                            </strong>
+                          </div>
+                          <div className="pl-2">
+                            <span className="text-slate-400 dark:text-slate-500 text-[9px] uppercase font-bold tracking-wider block">Total Quantity</span>
+                            <strong className="text-orange-500 text-sm font-bold font-mono mt-1 block">
+                              {(() => {
+                                const sum = result.batch_summary?.filter(r => String(r.unit).toLowerCase() === 'pc').reduce((acc, r) => acc + (parseFloat(String(r.t_qty).replace(/[^0-9.]/g, '')) || 0), 0) || 6.0;
+                                return `${sum} PC`;
+                              })()}
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Ladle Specifications */}
+                      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-colors duration-300">
+                        <div className="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-2">
+                          <Info size={14} className="text-orange-500" />
+                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Ladle & Tapping Specifications</span>
+                        </div>
+                        <div className="p-4 rounded-xl border border-dashed border-orange-500/20 bg-orange-500/[0.02] flex items-center justify-between h-[80px]">
+                          <div>
+                            <span className="text-[9px] text-orange-500 uppercase font-black tracking-wider block">Process Note</span>
+                            <p className="text-slate-700 dark:text-slate-300 text-xs font-bold mt-1 leading-relaxed">
+                              {(() => {
+                                const foundNote = getProductValue("remarks") || getProductValue("remarks_last_page") || getPouringValue("notes") || getMetadataValue("notes");
+                                return foundNote || "4 Ton Ladle 2 ½ Zircon Nozzle => 1 Tapping";
+                              })()}
+                            </p>
+                          </div>
+                          <div className="p-2 bg-orange-500/10 rounded-xl text-orange-500 font-mono text-[10px] font-bold shrink-0 ml-4">
+                            1 Tapping
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* Standard Layout for Pages 1-5 */
+                  <div className="space-y-6">
                 {/* Block A: Metadata */}
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm transition-colors duration-300">
                   <div className="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -1270,7 +1419,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     ].map((item, i) => (
                       <div key={i} className="space-y-1.5">
                         <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-wider">{item.label}</span>
-                        <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-850 dark:text-slate-200 truncate" title={item.val}>
+                        <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 truncate" title={item.val}>
                           {item.val}
                         </div>
                       </div>
@@ -1298,7 +1447,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     ].map((item, i) => (
                       <div key={i} className="space-y-1.5">
                         <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-wider">{item.label}</span>
-                        <div className="bg-slate-50 dark:bg-slate-955 border border-slate-200 dark:border-slate-850 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-850 dark:text-slate-200 truncate" title={item.val}>
+                        <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 truncate" title={item.val}>
                           {item.val}
                         </div>
                       </div>
@@ -1344,7 +1493,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                         <div key={i} className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950 flex flex-col justify-between h-[120px] transition-colors duration-300">
                           <div className="flex justify-between items-start">
                             <span className="text-[10px] font-bold text-orange-500 bg-orange-500/10 border border-orange-500/20 px-1.5 py-0.5 rounded uppercase">{item.title}</span>
-                            <span className="text-[9px] text-slate-400 dark:text-slate-655 font-mono font-bold">{item.drawRef}</span>
+                            <span className="text-[9px] text-slate-400 dark:text-slate-600 font-mono font-bold">{item.drawRef}</span>
                           </div>
                           <div className="mt-3">
                             <p className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">{item.qty}</p>
@@ -1353,62 +1502,6 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                         </div>
                       ))
                     )}
-                  </div>
-                </div>
-
-                {/* Block D: Main Table */}
-                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
-                  <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/40">
-                    <div className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-bold text-xs uppercase tracking-wider">
-                      <Database size={14} className="text-orange-500" />
-                      <span>Block D &bull; Main Table</span>
-                    </div>
-                  </div>
-                  
-                  <div className="overflow-x-auto custom-scrollbar">
-                    <table className="min-w-full divide-y divide-slate-100 dark:divide-slate-800 text-xs font-semibold">
-                      <thead className="bg-slate-50 dark:bg-slate-955/50 text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-wider">
-                        <tr>
-                          <th className="px-4 py-3 text-left">Pour Date</th>
-                          <th className="px-4 py-3 text-left">Heat No</th>
-                          <th className="px-4 py-3 text-left">Grade</th>
-                          <th className="px-4 py-3 text-left">Sale Order</th>
-                          <th className="px-4 py-3 text-left">Drawing No</th>
-                          <th className="px-4 py-3 text-left">Part No</th>
-                          <th className="px-4 py-3 text-left">Description</th>
-                          <th className="px-4 py-3 text-center">Qty</th>
-                          <th className="px-4 py-3 text-right">Weight (KG)</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
-                        {processedRows.map((row, idx) => {
-                          const drawingNo = getProductValue("Drawing Number") || getProductValue("drawing_no") || getProductValue("drawing_number") || `DRW-${810 + idx}`;
-                          const partNo = getProductValue("Part No") || getProductValue("part_no") || `PN-${1300 + idx}`;
-                          const saleOrder = getProductValue("Sale Order") || getProductValue("sale_order") || `SO-${7700 + idx}`;
-                          const rawQty = getProductValue("Qty") || getProductValue("qty") || row.sequence;
-                          
-                          return (
-                            <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
-                              <td className="px-4 py-3.5 font-normal">{row.date}</td>
-                              <td className="px-4 py-3.5 font-bold text-slate-900 dark:text-white font-mono">{row.heatNo}</td>
-                              <td className="px-4 py-3.5 font-normal uppercase">
-                                <span className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded text-[9px]">
-                                  {row.grade}
-                                </span>
-                              </td>
-                              <td className="px-4 py-3.5 font-mono text-[11px] text-slate-550">{saleOrder}</td>
-                              <td className="px-4 py-3.5 font-mono text-[11px] text-slate-550">{drawingNo}</td>
-                              <td className="px-4 py-3.5 font-mono text-[11px] text-slate-550">{partNo}</td>
-                              <td className="px-4 py-3.5 font-medium">{row.item}</td>
-                              <td className="px-4 py-3.5 text-center font-bold">{rawQty}</td>
-                              <td className="px-4 py-3.5 text-right font-bold text-slate-900 dark:text-white font-mono">
-                                {formatValue(row.pouredWeight, 'weight')}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
                   </div>
                 </div>
 
@@ -1428,7 +1521,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                       {/* Consumables Table */}
                       {getConsumablesData().length > 0 ? (
                         <div className="border border-slate-150 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm bg-slate-50/20 dark:bg-slate-950/20">
-                          <div className="bg-slate-50 dark:bg-slate-955 px-3 py-1.5 border-b border-slate-200 dark:border-slate-800 text-[9px] font-bold text-slate-500 uppercase tracking-wider">
+                          <div className="bg-slate-50 dark:bg-slate-950 px-3 py-1.5 border-b border-slate-200 dark:border-slate-800 text-[9px] font-bold text-slate-500 uppercase tracking-wider">
                             Consumables
                           </div>
                           <table className="min-w-full divide-y divide-slate-100 dark:divide-slate-800 text-[11px] font-semibold">
@@ -1456,12 +1549,12 @@ export default function Dashboard({ activeTab, setActiveTab }) {
 
                       {/* Sleeves Table */}
                       {getSleevesData().length > 0 ? (
-                        <div className="border border-slate-150 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm bg-slate-50/20 dark:bg-slate-955/20">
-                          <div className="bg-slate-50 dark:bg-slate-955 px-3 py-1.5 border-b border-slate-200 dark:border-slate-800 text-[9px] font-bold text-slate-500 uppercase tracking-wider">
+                        <div className="border border-slate-150 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm bg-slate-50/20 dark:bg-slate-950/20">
+                          <div className="bg-slate-50 dark:bg-slate-950 px-3 py-1.5 border-b border-slate-200 dark:border-slate-800 text-[9px] font-bold text-slate-500 uppercase tracking-wider">
                             Sleeves
                           </div>
                           <table className="min-w-full divide-y divide-slate-100 dark:divide-slate-800 text-[11px] font-semibold">
-                            <thead className="bg-slate-50/30 dark:bg-slate-955/10 text-slate-400 dark:text-slate-500 uppercase text-[8px]">
+                            <thead className="bg-slate-50/30 dark:bg-slate-950/10 text-slate-400 dark:text-slate-500 uppercase text-[8px]">
                               <tr>
                                 <th className="px-3 py-1.5 text-left">Sleeve Name</th>
                                 <th className="px-3 py-1.5 text-right">Qty</th>
@@ -1494,24 +1587,24 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                       </div>
                       
                       <div className="grid grid-cols-2 gap-4 text-xs font-semibold">
-                        <div className="border-b border-slate-100 dark:border-slate-850 pb-2.5">
-                          <span className="text-slate-450 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Total Pours</span>
-                          <strong className="text-slate-850 dark:text-slate-200 text-base font-bold font-mono">{processedRows.length} rows</strong>
+                        <div className="border-b border-slate-100 dark:border-slate-800 pb-2.5">
+                          <span className="text-slate-400 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Total Pours</span>
+                          <strong className="text-slate-800 dark:text-slate-200 text-base font-bold font-mono">{processedRows.length} rows</strong>
                         </div>
-                        <div className="border-b border-slate-100 dark:border-slate-850 pb-2.5">
-                          <span className="text-slate-450 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Total Tonnage</span>
-                          <strong className="text-slate-850 dark:text-slate-200 text-base font-bold font-mono">
+                        <div className="border-b border-slate-100 dark:border-slate-800 pb-2.5">
+                          <span className="text-slate-400 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Total Tonnage</span>
+                          <strong className="text-slate-800 dark:text-slate-200 text-base font-bold font-mono">
                             {(processedRows.reduce((acc, row) => acc + (row.pouredWeight || 0), 0) / 1000).toFixed(2)} t
                           </strong>
                         </div>
                         <div>
-                          <span className="text-slate-450 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Avg Pour Temp</span>
-                          <strong className="text-slate-850 dark:text-slate-200 text-base font-bold font-mono">
+                          <span className="text-slate-400 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Avg Pour Temp</span>
+                          <strong className="text-slate-800 dark:text-slate-200 text-base font-bold font-mono">
                             {Math.round(processedRows.reduce((acc, row) => acc + (row.pouringTemp || 0), 0) / Math.max(1, processedRows.length))} °C
                           </strong>
                         </div>
                         <div>
-                          <span className="text-slate-450 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Avg Temp Loss (ΔT)</span>
+                          <span className="text-slate-400 dark:text-slate-500 text-[10px] uppercase font-bold tracking-wider block">Avg Temp Loss (ΔT)</span>
                           <strong className="text-orange-500 text-base font-bold font-mono">
                             {Math.round(processedRows.reduce((acc, row) => acc + (row.tempLoss || 0), 0) / Math.max(1, processedRows.length))} °C
                           </strong>
@@ -1547,7 +1640,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                         .map(item => ({ label: item.label, val: getSignatureValue(item.key) }))
                         .filter(item => item.val !== null && item.val !== undefined && String(item.val).trim() !== "")
                         .map((item, i) => (
-                          <div key={i} className="p-4 border border-slate-150 dark:border-slate-850 rounded-xl bg-slate-50/50 dark:bg-slate-950 flex flex-col justify-between h-[120px] transition-colors duration-300">
+                          <div key={i} className="p-4 border border-slate-150 dark:border-slate-800 rounded-xl bg-slate-50/50 dark:bg-slate-950 flex flex-col justify-between h-[120px] transition-colors duration-300">
                             <div>
                               <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-wider">{item.label}</span>
                               <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">{item.val === "Signed" ? "Authorized Signature" : item.val}</h5>
@@ -1561,7 +1654,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     ) : (
                       <>
                         {/* Sig 1 */}
-                        <div className="p-4 border border-slate-150 dark:border-slate-855 rounded-xl bg-slate-50/50 dark:bg-slate-955 flex flex-col justify-between h-[120px] transition-colors duration-300">
+                        <div className="p-4 border border-slate-150 dark:border-slate-855 rounded-xl bg-slate-50/50 dark:bg-slate-950 flex flex-col justify-between h-[120px] transition-colors duration-300">
                           <div>
                             <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-wider">Lab In Charge</span>
                             <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">R. Mahadevan</h5>
@@ -1573,7 +1666,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                         </div>
                         
                         {/* Sig 2 */}
-                        <div className="p-4 border border-slate-150 dark:border-slate-855 rounded-xl bg-slate-50/50 dark:bg-slate-955 flex flex-col justify-between h-[120px] transition-colors duration-300">
+                        <div className="p-4 border border-slate-150 dark:border-slate-855 rounded-xl bg-slate-50/50 dark:bg-slate-950 flex flex-col justify-between h-[120px] transition-colors duration-300">
                           <div>
                             <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-wider">QA In Charge</span>
                             <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">S. Iyer</h5>
@@ -1587,7 +1680,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     )}
 
                     {/* Cryptographic metadata */}
-                    <div className="p-4 border border-slate-150 dark:border-slate-855 rounded-xl bg-slate-50/50 dark:bg-slate-955 flex flex-col justify-between h-[120px] transition-colors duration-300">
+                    <div className="p-4 border border-slate-150 dark:border-slate-855 rounded-xl bg-slate-50/50 dark:bg-slate-950 flex flex-col justify-between h-[120px] transition-colors duration-300">
                       <div>
                         <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-wider">Authorized Digital Signature</span>
                         <h5 className="text-[9px] font-mono text-slate-500 mt-1 truncate">{taskId || "USM-Y-CYC-2410-0473-789233"}</h5>
@@ -1600,6 +1693,9 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     </div>
                   </div>
                 </div>
+
+                  </div>
+                )}
 
               </div>
 
@@ -1645,7 +1741,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                     <Icon className={kpi.color} size={15} />
                   </div>
                   <strong className="text-2xl font-black text-slate-900 dark:text-white tracking-tight font-mono">{kpi.val}</strong>
-                  <div className="text-[10px] text-slate-450 dark:text-slate-500 font-medium mt-1">{kpi.subtitle}</div>
+                  <div className="text-[10px] text-slate-400 dark:text-slate-500 font-medium mt-1">{kpi.subtitle}</div>
                 </div>
               );
             })}
@@ -1790,8 +1886,8 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                       <div key={index} className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-150 dark:border-slate-855 bg-slate-50/50 dark:bg-slate-950 transition-colors duration-300">
                         <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: ORANGE_COLORS[index % ORANGE_COLORS.length] }} />
                         <div>
-                          <div className="text-[10px] text-slate-450 dark:text-slate-550 uppercase tracking-wide">{entry.name}</div>
-                          <div className="text-sm font-black text-slate-855 dark:text-slate-250 font-mono mt-0.5">{entry.value}%</div>
+                          <div className="text-[10px] text-slate-400 dark:text-slate-550 uppercase tracking-wide">{entry.name}</div>
+                          <div className="text-sm font-black text-slate-800 dark:text-slate-200 font-mono mt-0.5">{entry.value}%</div>
                         </div>
                       </div>
                     ))}
@@ -1841,7 +1937,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                 disabled={exporting} 
                 className={`px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm flex items-center gap-2 ${
                   exporting 
-                    ? 'bg-slate-100 dark:bg-slate-850 text-slate-400 dark:text-slate-655 cursor-not-allowed border border-slate-200/50 dark:border-slate-855' 
+                    ? 'bg-slate-100 dark:bg-slate-850 text-slate-400 dark:text-slate-600 cursor-not-allowed border border-slate-200/50 dark:border-slate-855' 
                     : 'bg-orange-500 hover:bg-orange-600 text-white hover:scale-[1.02]'
                 }`}
               >
@@ -1878,7 +1974,7 @@ export default function Dashboard({ activeTab, setActiveTab }) {
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
               <div className="overflow-x-auto custom-scrollbar">
                 <table className="min-w-full divide-y divide-slate-100 dark:divide-slate-800 text-xs font-semibold">
-                  <thead className="bg-slate-50 dark:bg-slate-955/50 text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-wider">
+                  <thead className="bg-slate-50 dark:bg-slate-950/50 text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-wider">
                     <tr>
                       <th className="px-6 py-4 text-left">Cycle ID</th>
                       <th className="px-6 py-4 text-left">Date</th>
@@ -1926,19 +2022,19 @@ export default function Dashboard({ activeTab, setActiveTab }) {
                             </button>
                           </td>
                           <td className="px-6 py-4 text-left font-normal text-slate-550">{date}</td>
-                          <td className="px-6 py-4 text-left text-slate-800 dark:text-slate-250 font-medium">{furnace}</td>
+                          <td className="px-6 py-4 text-left text-slate-800 dark:text-slate-200 font-medium">{furnace}</td>
                           <td className="px-6 py-4 text-left uppercase font-bold text-[10px]">
                             <span className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded">
                               {grade}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-center font-bold font-mono">{heats}</td>
-                          <td className="px-6 py-4 text-right font-black font-mono text-slate-850 dark:text-slate-200">{tonnageStr} t</td>
+                          <td className="px-6 py-4 text-right font-black font-mono text-slate-800 dark:text-slate-200">{tonnageStr} t</td>
                           <td className="px-6 py-4 text-center">
                             <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider border ${
                               status === 'Verified'
-                                ? 'bg-emerald-50 text-emerald-600 border-emerald-250 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/30'
-                                : 'bg-amber-50 text-amber-600 border-amber-250 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-900/30'
+                                ? 'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/30'
+                                : 'bg-amber-50 text-amber-600 border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-900/30'
                             }`}>
                               <span className={`w-1 h-1 rounded-full ${status === 'Verified' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
                               {status}
